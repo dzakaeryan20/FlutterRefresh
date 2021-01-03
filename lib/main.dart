@@ -34,7 +34,8 @@ class _HomePageState extends State<HomePage> {
     var platform = Theme.of(context).platform;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Refresh Pull Down'),
+        backgroundColor: Colors.indigo,
+        title:  Text('Refresh Pull Down', style: TextStyle(color: Colors.black),),
       ),
       body: platform == TargetPlatform.android ?  _buildWidgetListDataAndroid() : _buildWidgetListDataIOS()
     );
