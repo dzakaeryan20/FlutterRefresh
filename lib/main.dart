@@ -79,21 +79,22 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildWidgetItemListData(User user, BuildContext context) {
     return Card(
+      color: user.color,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Container(
-          color: user.color,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: Text('Text Color'),
+          padding: const EdgeInsets.all(15.0),
+          child: Container(
+            //color: user.color,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: Text('Text Color'),
 
-              )
-            ],
-          ),
-        ),
-      ),
+                )
+              ],
+            ),
+          )
+      )
     );
   }
 
