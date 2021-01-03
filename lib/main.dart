@@ -1,12 +1,9 @@
 // import 'dart:html';
 // import 'dart:io';
 import 'dart:math';
-
-//import 'package:flutter/material.dart';
-import 'dart:io' show Platform;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter/foundation.dart' show TargetPlatform;
 void main() => runApp(App());
 
 class App extends StatelessWidget {
@@ -28,17 +25,18 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    listData..add(User('User 1', 10, Colors.red))..add(User('User 2', 15, Colors.yellow))..add(User('User 3', 19, Colors.green));
+    listData..add(User(Colors.red))..add(User(Colors.yellow))..add(User(Colors.green));
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    var platform = Theme.of(context).platform;
     return Scaffold(
       appBar: AppBar(
         title: Text('Refresh Pull Down'),
       ),
-      body: _buildWidgetListDataAndroid()
+      body: platform == TargetPlatform.android ?  _buildWidgetListDataAndroid() : _buildWidgetListDataIOS()
     );
   }
 
@@ -87,11 +85,10 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(user.nama),
-              Text(
-                '${user.nomor}',
-                style: Theme.of(context).textTheme.caption,
-              ),
+              Center(
+                child: Text('Text Color'),
+
+              )
             ],
           ),
         ),
@@ -104,11 +101,9 @@ class _HomePageState extends State<HomePage> {
     listData.clear();
     await Future.delayed(Duration(seconds: 1));
     for (var index = 0; index < 10; index++) {
-      var nama = 'User ${index + 1}';
-      var nomor = Random().nextInt(100);
       var cl = dataColors[Random().nextInt(dataColors.length)];
       print("masuk sini");
-      listData.add(User(nama, nomor, cl));
+      listData.add(User(cl));
     }
     print(listData);
     setState(() {});
@@ -116,73 +111,6 @@ class _HomePageState extends State<HomePage> {
 }
 
 class User {
-  final String nama;
-  final int nomor;
   final color;
-
-  User(this.nama, this.nomor, this.color);
+  User(this.color);
 }
-//void main() {
-//  // Tutorial begininng
-//  //runApp(
-////    MaterialApp(
-////      home: Center(
-////        child: Text("Hello Gaes"),
-////      ),
-////    ),
-////  );
-//
-//// Hot Reload
-//  runApp(
-//    MyApp()
-//  );
-//}
-//
-//class MyApp extends StatelessWidget {
-//
-//  @override
-//  Widget build(BuildContext context) {
-//    // TODO: implement build
-//    // String Texts = refresh();
-//
-//    return MaterialApp(
-//      home: Scaffold(
-//        appBar: AppBar(
-//          title: Center(
-//            child: Text("Demo Refresh"),
-//          ),
-//        ),
-//        backgroundColor: Colors.indigo,
-//        body: actionrefrsh(),
-//
-//      ),
-//
-//    );
-//  }
-//
-//  Widget actionrefrsh(){
-//    print("Return list");
-//    return RefreshIndicator(child: Text("Data List"), onRefresh: refresh);
-//  }
-//
-//  Future refresh() async{
-//    print("Refresh");
-//    await Future.delayed(Duration(seconds: 2));
-//    //setState(() {})
-//    // return "Demo Refresh ";
-//  }
-//}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
